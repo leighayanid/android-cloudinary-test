@@ -1,15 +1,28 @@
 package cloudinary.com.cloudinarytest;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.cloudinary.Cloudinary;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final int PICK_PHOTO_REQUEST = 1;
+    private static final int MEDIA_TYPE_IMAGE = 2;
+    private ImageView mImageView;
+    protected Uri mMediaUri;
+    private Cloudinary cloudinary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +35,24 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+             
             }
         });
+
+        Map config = new HashMap();
+        config.put("cloud_name", "rentapp");
+        config.put("api_key", "123456789012345");
+        config.put("api_secret", "Q11RAIP6TdssH2T89vFWZTsFN0Q");
+        cloudinary = new Cloudinary(config);
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
